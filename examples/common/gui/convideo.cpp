@@ -29,6 +29,7 @@
 #include "video.h"
 #include <cassert>
 #include <stdio.h>
+#include <conio.h>
 
 unsigned int *              g_pImg = 0;
 int                         g_sizex, g_sizey;
