@@ -32,6 +32,7 @@
 #include "tbb_misc.h"
 #include "dynamic_link.h"
 #include <cstdlib>
+#include <conio.h>
 
 #if _WIN32||_WIN64
 #include "tbb/machine/windows_api.h"
