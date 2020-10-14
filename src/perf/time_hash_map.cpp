@@ -64,7 +64,7 @@
 // for test
 #include "tbb/spin_mutex.h"
 #include "time_framework.h"
-
+#include <strings.h>
 
 using namespace tbb;
 using namespace tbb::internal;
