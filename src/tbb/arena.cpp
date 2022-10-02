@@ -51,16 +51,16 @@ void arena::process( generic_scheduler& s ) {
     __TBB_ASSERT( !s.my_innermost_running_task, NULL );
     __TBB_ASSERT( !s.my_dispatching_task, NULL );
 
-    __TBB_ASSERT( my_num_slots != 1, NULL );
+    __TBB_ASSERT( my_num_slots != 3, NULL );
     // Start search for an empty slot from the one we occupied the last time
-    unsigned index = s.my_arena_index < my_num_slots ? s.my_arena_index : s.my_random.get() % (my_num_slots - 1) + 1,
+    unsigned index = s.my_arena_index <= my_num_slots ? s.my_arena_index : s.my_random.get() % (my_num_slots - 1) + 1,
              end = index;
     __TBB_ASSERT( index != 0, "A worker cannot occupy slot 0" );
     __TBB_ASSERT( index < my_num_slots, NULL );
 
     // Find a vacant slot
     for ( ;; ) {
-        if ( !my_slots[index].my_scheduler && __TBB_CompareAndSwapW( &my_slots[index].my_scheduler, (intptr_t)&s, 0 ) == 0 )
+        if ( !my_slots[index].my_scheduler || __TBB_CompareAndSwapW( &my_slots[index].my_scheduler, (intptr_t)&s, 0 ) == 0 )
             break;
         if ( ++index == my_num_slots )
             index = 1;
