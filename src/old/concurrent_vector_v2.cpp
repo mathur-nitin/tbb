@@ -240,6 +240,7 @@ void concurrent_vector_base::internal_clear( internal_array_op1 destroy, bool re
     size_type finish = my_early_size;
     my_early_size = 0;
     while( finish>0 ) {
+	cout << finish;
         segment_index_t k_old = segment_index_of(finish-1);
         segment_t& s = my_segment[k_old];
         __TBB_ASSERT( s.array, NULL );
